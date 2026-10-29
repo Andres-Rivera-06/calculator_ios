@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.ViewModel
 
 class CalculatorViewModel : ViewModel() {
@@ -31,7 +32,12 @@ class CalculatorViewModel : ViewModel() {
                     result.value = contentResult.joinToString("")
                 }
             }
+            "=" -> {
+                calculateResult()
+            }
+            "⁺/₋" -> {
 
+            }
             "1" -> {
 
             }
@@ -44,10 +50,54 @@ class CalculatorViewModel : ViewModel() {
 
     }
 
+    private fun isPartOfNumber(value: String): Boolean {
+
+        if(value =="."){
+            return true
+        }
+
+        if (value.toDoubleOrNull() != null){
+            return true
+        }
+        return false
+    }
+
+    fun gruopNumbers(): List<String>{
+        val tokens = mutableListOf<String>()
+        var currentNumber= ""
+
+        for (item in contentResult) {
+            if (isPartOfNumber(item)) {
+                currentNumber += item
+            } else {
+                tokens.add(currentNumber)
+                currentNumber = ""
+                tokens.add(item)
+            }
+        }
+        if (currentNumber.isNotEmpty()){
+            tokens.add(currentNumber)
+        }
+        return tokens
+    }
+
     fun calculateResult(): Double {
+        val groupList = gruopNumbers()
+        while (true){
+
+            for (item in groupList){
+                if(item == "*"){
+                    val numer1 = groupList.indexOf(item) - 1
+                    val number2 = groupList.indexOf(item) + 1
+                }
+            }
+        }
+
         var result: Double = 0.0
         return result
     }
+
+
 
     fun add(number1: String, number2: String): String {
         val num1 = number1.toDoubleOrNull()
