@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">miPrimerApp</string>
+
+    <string name="msgError">Error en la operación</string>
+
+    <string name="addSymbol">+</string>
+    <string name="subtractionSymbol">-</string>
+    <string name="multiplySymbol">x</string>
+    <string name="divideSymbol">÷</string>
+
+</resources>

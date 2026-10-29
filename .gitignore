@@ -1,0 +1,66 @@
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+.gradle/
+build/
+*/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+
+
+# Android Studio
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Android Studio generated
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Kotlin
+*.kotlin_module
+
+# Logs
+*.log
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Keystore files ()
+*.jks
+*.keystore
+
+# Build outputs
+*.apk
+*.ap_
+*.aab
+
+# Navigation safe args
+.navigation/
+
+# Firebase / Google Services
+# (opcional según proyecto)
+google-services.json
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*~
+
+# Android profiling
+*.hprof
+
