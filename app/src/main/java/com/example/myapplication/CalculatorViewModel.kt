@@ -4,21 +4,39 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 
-class CalculatorViewModel: ViewModel() {
+class CalculatorViewModel : ViewModel() {
 
     private val model = CalculatorModel()
 
     val result = mutableStateOf("0")
     var contentResult = mutableListOf("0")
 
-    fun manageClickButtons(valueButton: String){
+    fun manageClickButtons(valueButton: String) {
         if (valueButton.isEmpty()) return
         contentResult.add(valueButton)
 
         result.value = contentResult.joinToString("")
 
         when (valueButton) {
-            "-" -> {
+            "AC" -> {
+                contentResult.clear()
+                result.value = "0"
+            }
+
+            "≪" -> {
+                contentResult.removeLastOrNull()
+                if (contentResult.isEmpty()) {
+                    result.value = "0"
+                } else {
+                    result.value = contentResult.joinToString("")
+                }
+            }
+
+            "1" -> {
+
+            }
+
+            "2" -> {
 
             }
 
@@ -26,12 +44,12 @@ class CalculatorViewModel: ViewModel() {
 
     }
 
-    fun calculateResult(): Double{
+    fun calculateResult(): Double {
         var result: Double = 0.0
         return result
     }
 
-    fun add(number1: String, number2: String): String{
+    fun add(number1: String, number2: String): String {
         val num1 = number1.toDoubleOrNull()
         val num2 = number2.toDoubleOrNull()
         if (num1 != null && num2 != null) {
@@ -43,7 +61,7 @@ class CalculatorViewModel: ViewModel() {
     }
 
     @Composable
-    fun subtraction(number1: String, number2: String): String{
+    fun subtraction(number1: String, number2: String): String {
         val num1 = number1.toDoubleOrNull()
         val num2 = number2.toDoubleOrNull()
         if (num1 != null && num2 != null) {
