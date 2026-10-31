@@ -83,21 +83,33 @@ class CalculatorViewModel : ViewModel() {
 
     fun calculateResult(): Double {
         val groupList = gruopNumbers()
+        var result: String
         while (true){
 
             for (item in groupList){
                 if(item == "*"){
                     val numer1 = groupList.indexOf(item) - 1
                     val number2 = groupList.indexOf(item) + 1
+                    result  = multiply(numer1, number2)
                 }
             }
+            break
         }
 
-        var result: Double = 0.0
+
         return result
     }
 
-
+    fun multiply(number1: String, number2: String): String {
+        val num1 = number1.toDoubleOrNull()
+        val num2 = number2.toDoubleOrNull()
+        if (num1 != null && num2 != null) {
+            val result = model.multiply(num1, num2).toString()
+            return result
+        }else{
+            return "Error"
+        }
+    }
 
     fun add(number1: String, number2: String): String {
         val num1 = number1.toDoubleOrNull()
