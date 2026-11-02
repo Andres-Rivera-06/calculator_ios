@@ -8,7 +8,7 @@ class CalculatorViewModel : ViewModel() {
     private val model = CalculatorModel()
 
     val result = mutableStateOf("0")
-    var contentResult = mutableListOf("0")
+    var contentResult = mutableListOf<String>()
     val previousOperation = mutableStateOf("")
 
     fun manageClickButtons(valueButton: String) {
@@ -29,8 +29,6 @@ class CalculatorViewModel : ViewModel() {
                 } else {
                     result.value = contentResult.joinToString("")
                 }
-                println("result.value " + result.value)
-                println("contentResult " + contentResult.toString())
             }
 
             "=" -> {
@@ -79,9 +77,9 @@ class CalculatorViewModel : ViewModel() {
         for (item in contentResult) {
             var isNegativeSign: Boolean
 
-            if (item == "-" && currentNumber.isEmpty()){
+            if (item == "-" && currentNumber.isEmpty()) {
                 isNegativeSign = true
-            }else{
+            } else {
                 isNegativeSign = false
             }
 
