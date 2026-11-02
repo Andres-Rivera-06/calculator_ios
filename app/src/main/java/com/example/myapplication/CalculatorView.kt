@@ -1,4 +1,5 @@
 package com.example.myapplication
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -43,6 +44,7 @@ fun ShowCalculator(
     navController: NavController
 ) {
     val result = viewModel.result.value
+    val previousOperation = viewModel.previousOperation
 
     Column(
         modifier = Modifier
@@ -82,7 +84,7 @@ fun ShowCalculator(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(end = 5.dp, start = 5.dp),
-                text = "0",
+                text = previousOperation.value,
                 fontSize = 40.sp,
                 color = Color.Gray,
                 textAlign = TextAlign.End,
@@ -146,7 +148,7 @@ fun ShowCalculator(
                 ) {
                     ShowButton("⁺/₋", Color(0xFF2A2928), viewModel)
                     ShowButton("0", Color(0xFF2A2928), viewModel)
-                    ShowButton(",", Color(0xFF2A2928), viewModel)
+                    ShowButton(".", Color(0xFF2A2928), viewModel)
                     ShowButton("=", Color(0xFFFFA70E), viewModel)
                 }
             }
