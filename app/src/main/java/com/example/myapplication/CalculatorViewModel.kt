@@ -16,7 +16,8 @@ class CalculatorViewModel : ViewModel() {
     val historyOperations = mutableStateListOf<String>()
     val historyResults = mutableStateListOf<String>()
 
-    val hasHistory = historyResults.isNotEmpty() && historyOperations.isNotEmpty()
+    val hasHistory: Boolean
+        get() = historyResults.isNotEmpty() && historyOperations.isNotEmpty()
 
     fun manageClickButtons(valueButton: String) {
 
