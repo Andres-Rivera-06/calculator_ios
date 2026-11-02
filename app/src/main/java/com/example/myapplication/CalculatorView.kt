@@ -47,7 +47,7 @@ fun ShowCalculator(
         Column(
         ) {
             Button(
-                onClick = { navController.navigate("history") },
+                onClick = { navController.navigate("history") { launchSingleTop = true } },
                 shape = CircleShape,
                 colors = ButtonDefaults.buttonColors(colorResource(R.color.controlButtom)),
                 contentPadding = PaddingValues(0.dp),

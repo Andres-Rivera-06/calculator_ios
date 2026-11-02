@@ -50,7 +50,11 @@ fun ShowHistory(
             .safeDrawingPadding()
     ) {
         Button(
-            onClick = { navController.popBackStack() },
+            onClick = {
+                if (navController.previousBackStackEntry != null) {
+                    navController.popBackStack()
+                }
+            },
             shape = CircleShape,
             colors = ButtonDefaults.buttonColors(colorResource(R.color.controlButtom)),
             contentPadding = PaddingValues(0.dp),
