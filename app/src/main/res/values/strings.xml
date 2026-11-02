@@ -8,5 +8,6 @@
     <string name="multiplySymbol">x</string>
     <string name="divideSymbol">÷</string>
     <string name="historySymbol">\u27F2</string>
+    <string name="msgEmptyHistory">No hay historial</string>
 
 </resources>

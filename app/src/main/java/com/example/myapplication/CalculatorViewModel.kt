@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 
@@ -10,6 +11,12 @@ class CalculatorViewModel : ViewModel() {
     val result = mutableStateOf("0")
     var contentResult = mutableListOf<String>()
     val previousOperation = mutableStateOf("")
+
+
+    val historyOperations = mutableStateListOf<String>()
+    val historyResults = mutableStateListOf<String>()
+
+    val hasHistory = historyResults.isNotEmpty() && historyOperations.isNotEmpty()
 
     fun manageClickButtons(valueButton: String) {
 
@@ -38,6 +45,11 @@ class CalculatorViewModel : ViewModel() {
                 if (resultOperation.toDoubleOrNull() != null) {
                     contentResult.addAll(resultOperation.map { it.toString() })
                 }
+                historyOperations.add(previousOperation.value)
+                historyResults.add(resultOperation)
+
+                println("History OP = " + historyOperations[0])
+                println("History Re = " + historyResults[0])
 
             }
 

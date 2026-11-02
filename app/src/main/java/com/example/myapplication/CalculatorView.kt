@@ -26,7 +26,8 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-
+import androidx.compose.material3.Icon
+import androidx.compose.ui.res.painterResource
 
 @Composable
 fun ShowCalculator(
@@ -53,12 +54,12 @@ fun ShowCalculator(
                 modifier = Modifier
                     .padding(12.dp)
                     .size(60.dp)
-
             ) {
-                Text(
-                    text = stringResource(id= R.string.historySymbol),
-                    fontSize = 26.sp,
-                    color = Color.White
+                Icon(
+                    painter = painterResource(id = R.drawable.baseline_schedule_24),
+                    contentDescription = "Historial",
+                    tint = Color.White,
+                    modifier = Modifier.size(28.dp)
                 )
             }
         }
