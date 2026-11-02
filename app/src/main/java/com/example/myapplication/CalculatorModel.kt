@@ -23,4 +23,8 @@ class CalculatorModel {
         return  num1 % num2
     }
 
+    fun percent(num1: Double, num2: Double): Double {
+        return num1 * num2 / 100
+    }
+
 }

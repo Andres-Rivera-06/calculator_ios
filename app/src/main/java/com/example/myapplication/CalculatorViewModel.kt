@@ -75,9 +75,13 @@ class CalculatorViewModel : ViewModel() {
         var currentNumber = ""
 
         for (item in contentResult) {
-            var isNegativeSign: Boolean
+            var lastToken = ""
+            if (tokens.isNotEmpty()) {
+                lastToken = tokens[tokens.size - 1]
+            }
 
-            if (item == "-" && currentNumber.isEmpty()) {
+            var isNegativeSign: Boolean
+            if (item == "-" && currentNumber.isEmpty() && lastToken != "%") {
                 isNegativeSign = true
             } else {
                 isNegativeSign = false
@@ -86,7 +90,9 @@ class CalculatorViewModel : ViewModel() {
             if (isPartOfNumber(item) || isNegativeSign) {
                 currentNumber += item
             } else {
-                tokens.add(currentNumber)
+                if (currentNumber.isNotEmpty()) {
+                    tokens.add(currentNumber)
+                }
                 currentNumber = ""
                 tokens.add(item)
             }
@@ -99,24 +105,62 @@ class CalculatorViewModel : ViewModel() {
 
     fun calculateResult(): String {
         val groupList = groupNumbers()
+        if (groupList.isEmpty()) {
+            return "0"
+        }
+        if (groupList[0].toDoubleOrNull() == null) {
+            groupList.add(0, "0")
+        }
+        return evaluate(groupList)
+    }
+
+    private fun evaluate(groupList: MutableList<String>): String {
         var result: String
 
         var i = 0
         while (i < groupList.size) {
             val item = groupList[i]
-            if (item == "x" || item == "÷") {
+
+            var nextIsNumber = false
+            if (i + 1 < groupList.size && groupList[i + 1].toDoubleOrNull() != null) {
+                nextIsNumber = true
+            }
+
+            if (item == "%" && !nextIsNumber) {
+                var operatorBefore = ""
+                if (i - 2 >= 0) {
+                    operatorBefore = groupList[i - 2]
+                }
+
+                if (operatorBefore == "+" || operatorBefore == "-") {
+                    val base = evaluate(groupList.subList(0, i - 2).toMutableList())
+                    groupList[i - 1] = percent(base, groupList[i - 1])
+                } else {
+                    groupList[i - 1] = percent("1", groupList[i - 1])
+                }
+                groupList.removeAt(i)
+            } else {
+                i++
+            }
+        }
+
+        i = 0
+        while (i < groupList.size) {
+            val item = groupList[i]
+            if (item == "x" || item == "÷" || item == "%") {
                 val number1 = groupList[i - 1]
                 val number2 = groupList[i + 1]
                 if (item == "x") {
                     result = multiply(number1, number2)
-                } else {
+                } else if (item == "÷") {
                     result = divide(number1, number2)
+                } else {
+                    result = module(number1, number2)
                 }
 
                 groupList[i - 1] = result
                 groupList.removeAt(i + 1)
                 groupList.removeAt(i)
-
             } else {
                 i++
             }
@@ -141,7 +185,6 @@ class CalculatorViewModel : ViewModel() {
                 i++
             }
         }
-
 
         return groupList[0]
     }
@@ -193,6 +236,28 @@ class CalculatorViewModel : ViewModel() {
         }
     }
 
+    fun module(number1: String, number2: String): String {
+        val num1 = number1.toDoubleOrNull()
+        val num2 = number2.toDoubleOrNull()
+        if (num2 == 0.0) {
+            return "Sin definir"
+        }
+        if (num1 != null && num2 != null) {
+            return model.module(num1, num2).toCleanString()
+        } else {
+            return "Error"
+        }
+    }
+
+    fun percent(base: String, number: String): String {
+        val num1 = base.toDoubleOrNull()
+        val num2 = number.toDoubleOrNull()
+        if (num1 != null && num2 != null) {
+            return model.percent(num1, num2).toCleanString()
+        } else {
+            return "Error"
+        }
+    }
 }
 
 fun Double.toCleanString(): String =
