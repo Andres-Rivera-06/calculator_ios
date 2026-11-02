@@ -13,7 +13,6 @@ class CalculatorViewModel : ViewModel() {
 
     fun manageClickButtons(valueButton: String) {
 
-
         when (valueButton) {
             "AC" -> {
                 contentResult.clear()
@@ -43,12 +42,80 @@ class CalculatorViewModel : ViewModel() {
             }
 
             "⁺/₋" -> {
+                var numberStart = contentResult.size
+
+                while (numberStart > 0) {
+                    val previousItem = contentResult[numberStart - 1]
+                    if (isPartOfNumber(previousItem)) {
+                        numberStart--
+                    } else {
+                        break
+                    }
+                }
+                val signIndex = numberStart - 1
+
+                var itemBeforeNumber = ""
+                if (signIndex >= 0) {
+                    itemBeforeNumber = contentResult[signIndex]
+                }
+
+                var itemBeforeSign = ""
+                if (signIndex - 1 >= 0) {
+                    itemBeforeSign = contentResult[signIndex - 1]
+                }
+
+                var hasNegativeSign: Boolean
+                if (itemBeforeNumber != "-") {
+                    hasNegativeSign = false
+                } else if (itemBeforeSign == "") {
+                    hasNegativeSign = true
+                } else if (isPartOfNumber(itemBeforeSign)) {
+                    hasNegativeSign = false
+                } else if (itemBeforeSign == "%") {
+                    hasNegativeSign = false
+                } else {
+                    hasNegativeSign = true
+                }
+
+
+                if (hasNegativeSign) {
+                    contentResult.removeAt(signIndex)
+                } else {
+                    contentResult.add(numberStart, "-")
+                }
+
+                if (contentResult.isEmpty()) {
+                    result.value = "0"
+                } else {
+                    result.value = contentResult.joinToString("")
+                }
 
             }
 
             else -> {
                 if (valueButton.isEmpty()) return
-                contentResult.add(valueButton)
+
+                val isOperator = !isPartOfNumber(valueButton)
+
+                var lastItem = ""
+                if (contentResult.isNotEmpty()) {
+                    lastItem = contentResult[contentResult.size - 1]
+                }
+
+                var lastIsOperator: Boolean
+                if (lastItem == "" || lastItem == "%") {
+                    lastIsOperator = false
+                } else if (isPartOfNumber(lastItem)) {
+                    lastIsOperator = false
+                } else {
+                    lastIsOperator = true
+                }
+
+                if (isOperator && lastIsOperator) {
+                    contentResult[contentResult.size - 1] = valueButton
+                } else {
+                    contentResult.add(valueButton)
+                }
 
                 result.value = contentResult.joinToString("")
             }
@@ -261,7 +328,4 @@ class CalculatorViewModel : ViewModel() {
 }
 
 fun Double.toCleanString(): String =
-    toBigDecimal()
-        .setScale(10, java.math.RoundingMode.HALF_UP)
-        .stripTrailingZeros()
-        .toPlainString()
+    toBigDecimal().setScale(10, java.math.RoundingMode.HALF_UP).stripTrailingZeros().toPlainString()
