@@ -13,10 +13,7 @@ class CalculatorViewModel : ViewModel() {
     var contentResult = mutableListOf("0")
 
     fun manageClickButtons(valueButton: String) {
-        if (valueButton.isEmpty()) return
-        contentResult.add(valueButton)
 
-        result.value = contentResult.joinToString("")
 
         when (valueButton) {
             "AC" -> {
@@ -25,7 +22,9 @@ class CalculatorViewModel : ViewModel() {
             }
 
             "≪" -> {
+                println(contentResult)
                 contentResult.removeLastOrNull()
+                println(contentResult)
                 if (contentResult.isEmpty()) {
                     result.value = "0"
                 } else {
@@ -38,13 +37,13 @@ class CalculatorViewModel : ViewModel() {
             "⁺/₋" -> {
 
             }
-            "1" -> {
+            else -> {
+                if (valueButton.isEmpty()) return
+                contentResult.add(valueButton)
 
+                result.value = contentResult.joinToString("")
             }
 
-            "2" -> {
-
-            }
 
         }
 
@@ -90,14 +89,14 @@ class CalculatorViewModel : ViewModel() {
                 if(item == "*"){
                     val numer1 = groupList.indexOf(item) - 1
                     val number2 = groupList.indexOf(item) + 1
-                    result  = multiply(numer1, number2)
+                    result  = multiply("numer1", "number2")
                 }
             }
             break
         }
 
 
-        return result
+        return 0.0
     }
 
     fun multiply(number1: String, number2: String): String {

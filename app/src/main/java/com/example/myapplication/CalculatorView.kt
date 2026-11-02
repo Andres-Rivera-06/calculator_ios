@@ -2,6 +2,7 @@ package com.example.myapplication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -51,24 +52,32 @@ fun ShowCalculator(
     ) {
 
         Column(
+        ) {
+            Button(
+                onClick = { navController.navigate("history") },
+                shape = CircleShape,
+                colors = ButtonDefaults.buttonColors(colorResource(R.color.controlButtom)),
+                contentPadding = PaddingValues(0.dp),
+                modifier = Modifier
+                    .padding(12.dp)
+                    .size(60.dp)
+
+            ) {
+                Text(
+                    text = stringResource(id= R.string.historySymbol),
+                    fontSize = 26.sp,
+                    color = Color.White
+                )
+            }
+        }
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
                 .padding(10.dp),
             verticalArrangement = Arrangement.Bottom,
         ) {
-            Button(
-                onClick = { navController.navigate("history") },
-                shape = CircleShape,
-                colors = ButtonDefaults.buttonColors(Color.Blue),
-                modifier = Modifier
-                    .size(85.dp)
-            ) {
-                Text(
-                    text = "H",
-                    fontSize = 28.sp
-                )
-            }
+
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -156,6 +165,7 @@ fun ShowButton(text: String, color: Color, viewModel: CalculatorViewModel) {
     ) {
         Text(
             text = text,
+            color = Color.White,
             fontSize = 28.sp
         )
     }
