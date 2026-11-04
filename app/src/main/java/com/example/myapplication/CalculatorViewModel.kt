@@ -49,9 +49,6 @@ class CalculatorViewModel : ViewModel() {
                 historyOperations.add(previousOperation.value)
                 historyResults.add(resultOperation)
 
-                println("History OP = " + historyOperations[0])
-                println("History Re = " + historyResults[0])
-
             }
 
             "⁺/₋" -> {

@@ -110,37 +110,37 @@ fun ShowCalculator(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    ShowButton("7", Color(0xFF2A2928), viewModel)
-                    ShowButton("8", Color(0xFF2A2928), viewModel)
-                    ShowButton("9", Color(0xFF2A2928), viewModel)
-                    ShowButton(stringResource(id= R.string.multiplySymbol), Color(0xFFFFA70E), viewModel)
+                    ShowButton("7", colorResource(R.color.numberButtom), viewModel)
+                    ShowButton("8", colorResource(R.color.numberButtom), viewModel)
+                    ShowButton("9", colorResource(R.color.numberButtom), viewModel)
+                    ShowButton(stringResource(id= R.string.multiplySymbol), colorResource(R.color.operatorButtom), viewModel)
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    ShowButton("4", Color(0xFF2A2928), viewModel)
-                    ShowButton("5", Color(0xFF2A2928), viewModel)
-                    ShowButton("6", Color(0xFF2A2928), viewModel)
-                    ShowButton(stringResource(id= R.string.subtractionSymbol), Color(0xFFFFA70E), viewModel)
+                    ShowButton("4", colorResource(R.color.numberButtom), viewModel)
+                    ShowButton("5", colorResource(R.color.numberButtom), viewModel)
+                    ShowButton("6", colorResource(R.color.numberButtom), viewModel)
+                    ShowButton(stringResource(id= R.string.subtractionSymbol), colorResource(R.color.operatorButtom), viewModel)
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    ShowButton("1", Color(0xFF2A2928), viewModel)
-                    ShowButton("2", Color(0xFF2A2928), viewModel)
-                    ShowButton("3", Color(0xFF2A2928), viewModel)
-                    ShowButton(stringResource(id= R.string.addSymbol), Color(0xFFFFA70E), viewModel)
+                    ShowButton("1", colorResource(R.color.numberButtom), viewModel)
+                    ShowButton("2", colorResource(R.color.numberButtom), viewModel)
+                    ShowButton("3", colorResource(R.color.numberButtom), viewModel)
+                    ShowButton(stringResource(id= R.string.addSymbol), colorResource(R.color.operatorButtom), viewModel)
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    ShowButton("⁺/₋", Color(0xFF2A2928), viewModel)
-                    ShowButton("0", Color(0xFF2A2928), viewModel)
-                    ShowButton(".", Color(0xFF2A2928), viewModel)
-                    ShowButton("=", Color(0xFFFFA70E), viewModel)
+                    ShowButton("⁺/₋", colorResource(R.color.numberButtom), viewModel)
+                    ShowButton("0", colorResource(R.color.numberButtom), viewModel)
+                    ShowButton(".", colorResource(R.color.numberButtom), viewModel)
+                    ShowButton("=", colorResource(R.color.operatorButtom), viewModel)
                 }
             }
         }
