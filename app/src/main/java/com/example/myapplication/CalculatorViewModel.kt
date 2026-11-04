@@ -39,6 +39,10 @@ class CalculatorViewModel : ViewModel() {
             }
 
             "=" -> {
+                val lastItem = contentResult.lastOrNull()
+                if( lastItem == null || !isPartOfNumber(lastItem) && lastItem != "%"){
+                    return
+                }
                 val resultOperation = calculateResult()
                 result.value = resultOperation
                 previousOperation.value = contentResult.joinToString("")
