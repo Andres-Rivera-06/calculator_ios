@@ -69,7 +69,7 @@ fun ShowHistory(
                 tint = Color.White
             )
         }
-        if(viewModel.hasHistory){
+        if (viewModel.hasHistory) {
             LazyColumn(
 
                 contentPadding = PaddingValues(16.dp),
@@ -88,14 +88,18 @@ fun ShowHistory(
                                     .background(Color.White)
                         )
                         Text(
-                            modifier = Modifier.fillMaxWidth() .padding(16.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
                             text = historyOperations[index],
                             fontSize = 18.sp,
                             color = Color.Gray,
                             textAlign = TextAlign.Start
                         )
                         Text(
-                            modifier = Modifier.fillMaxWidth().padding(start = 16.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 16.dp),
                             text = historyResults[index],
                             fontSize = 30.sp,
                             color = Color.White,
@@ -104,12 +108,12 @@ fun ShowHistory(
                     }
                 }
             }
-        }else{
+        } else {
             Column(
                 modifier = Modifier
                     .fillMaxSize(),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.baseline_schedule_24),
@@ -131,7 +135,7 @@ fun ShowHistory(
 
 @Preview(showBackground = true)
 @Composable
-fun TestViewHistory(){
+fun TestViewHistory() {
     val navController = rememberNavController()
     ShowHistory(navController = navController)
 }

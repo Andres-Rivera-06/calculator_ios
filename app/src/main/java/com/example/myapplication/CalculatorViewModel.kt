@@ -40,7 +40,7 @@ class CalculatorViewModel : ViewModel() {
 
             "=" -> {
                 val lastItem = contentResult.lastOrNull()
-                if( lastItem == null || !isPartOfNumber(lastItem) && lastItem != "%"){
+                if (lastItem == null || !isPartOfNumber(lastItem) && lastItem != "%") {
                     return
                 }
                 val resultOperation = calculateResult()
