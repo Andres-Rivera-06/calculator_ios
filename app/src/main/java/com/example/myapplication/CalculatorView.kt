@@ -171,7 +171,11 @@ fun ShowCalculator(
                         viewModel
                     )
                     ShowButton("0", colorResource(R.color.numberButtom), viewModel)
-                    ShowButton(".", colorResource(R.color.numberButtom), viewModel)
+                    ShowButton(
+                        stringResource(id = R.string.decimalSymbol),
+                        colorResource(R.color.numberButtom),
+                        viewModel
+                    )
                     ShowButton(
                         stringResource(id = R.string.equalsSymbol),
                         colorResource(R.color.operatorButtom),
