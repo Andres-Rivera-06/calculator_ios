@@ -57,7 +57,7 @@ fun ShowCalculator(
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.baseline_schedule_24),
-                    contentDescription = "Historial",
+                    contentDescription = stringResource(id = R.string.history),
                     tint = Color.White,
                     modifier = Modifier.size(28.dp)
                 )
@@ -101,10 +101,26 @@ fun ShowCalculator(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    ShowButton("≪", colorResource(R.color.controlButtom), viewModel)
-                    ShowButton("AC", colorResource(R.color.controlButtom), viewModel)
-                    ShowButton("%", colorResource(R.color.controlButtom), viewModel)
-                    ShowButton(stringResource(id= R.string.divideSymbol), colorResource(R.color.operatorButtom), viewModel)
+                    ShowButton(
+                        stringResource(id = R.string.deleteSymbol),
+                        colorResource(R.color.controlButtom),
+                        viewModel
+                    )
+                    ShowButton(
+                        stringResource(id = R.string.clearSymbol),
+                        colorResource(R.color.controlButtom),
+                        viewModel
+                    )
+                    ShowButton(
+                        stringResource(id = R.string.percentSymbol),
+                        colorResource(R.color.controlButtom),
+                        viewModel
+                    )
+                    ShowButton(
+                        stringResource(id = R.string.divideSymbol),
+                        colorResource(R.color.operatorButtom),
+                        viewModel
+                    )
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -113,7 +129,11 @@ fun ShowCalculator(
                     ShowButton("7", colorResource(R.color.numberButtom), viewModel)
                     ShowButton("8", colorResource(R.color.numberButtom), viewModel)
                     ShowButton("9", colorResource(R.color.numberButtom), viewModel)
-                    ShowButton(stringResource(id= R.string.multiplySymbol), colorResource(R.color.operatorButtom), viewModel)
+                    ShowButton(
+                        stringResource(id = R.string.multiplySymbol),
+                        colorResource(R.color.operatorButtom),
+                        viewModel
+                    )
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -122,7 +142,11 @@ fun ShowCalculator(
                     ShowButton("4", colorResource(R.color.numberButtom), viewModel)
                     ShowButton("5", colorResource(R.color.numberButtom), viewModel)
                     ShowButton("6", colorResource(R.color.numberButtom), viewModel)
-                    ShowButton(stringResource(id= R.string.subtractionSymbol), colorResource(R.color.operatorButtom), viewModel)
+                    ShowButton(
+                        stringResource(id = R.string.subtractionSymbol),
+                        colorResource(R.color.operatorButtom),
+                        viewModel
+                    )
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -131,16 +155,28 @@ fun ShowCalculator(
                     ShowButton("1", colorResource(R.color.numberButtom), viewModel)
                     ShowButton("2", colorResource(R.color.numberButtom), viewModel)
                     ShowButton("3", colorResource(R.color.numberButtom), viewModel)
-                    ShowButton(stringResource(id= R.string.addSymbol), colorResource(R.color.operatorButtom), viewModel)
+                    ShowButton(
+                        stringResource(id = R.string.addSymbol),
+                        colorResource(R.color.operatorButtom),
+                        viewModel
+                    )
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    ShowButton("⁺/₋", colorResource(R.color.numberButtom), viewModel)
+                    ShowButton(
+                        stringResource(id = R.string.toggleSignSymbol),
+                        colorResource(R.color.numberButtom),
+                        viewModel
+                    )
                     ShowButton("0", colorResource(R.color.numberButtom), viewModel)
                     ShowButton(".", colorResource(R.color.numberButtom), viewModel)
-                    ShowButton("=", colorResource(R.color.operatorButtom), viewModel)
+                    ShowButton(
+                        stringResource(id = R.string.equalsSymbol),
+                        colorResource(R.color.operatorButtom),
+                        viewModel
+                    )
                 }
             }
         }
@@ -167,7 +203,7 @@ fun ShowButton(text: String, color: Color, viewModel: CalculatorViewModel) {
 
 @Preview(showBackground = true)
 @Composable
-fun TestView(){
+fun TestView() {
     val navController = rememberNavController()
     ShowCalculator(navController = navController)
 }

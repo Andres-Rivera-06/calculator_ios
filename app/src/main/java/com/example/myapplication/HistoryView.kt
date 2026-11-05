@@ -64,7 +64,7 @@ fun ShowHistory(
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.baseline_calculate_24),
-                contentDescription = "Volver",
+                contentDescription = stringResource(id = R.string.backToCalculator),
                 modifier = Modifier.size(26.dp),
                 tint = Color.White
             )
@@ -113,7 +113,7 @@ fun ShowHistory(
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.baseline_schedule_24),
-                    contentDescription = "Historial",
+                    contentDescription = stringResource(id = R.string.history),
                     tint = Color.Gray,
                     modifier = Modifier.size(52.dp)
                 )

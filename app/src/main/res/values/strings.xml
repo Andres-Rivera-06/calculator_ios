@@ -10,4 +10,13 @@
     <string name="historySymbol">\u27F2</string>
     <string name="msgEmptyHistory">No hay historial</string>
 
+    <string name="clearSymbol">AC</string>
+    <string name="deleteSymbol">≪</string>
+    <string name="percentSymbol" formatted="false">%</string>
+    <string name="toggleSignSymbol">⁺/₋</string>
+    <string name="equalsSymbol">=</string>
+    <string name="decimalSymbol">.</string>
+
+    <string name="history">Historial</string>
+    <string name="backToCalculator">Volver</string>
 </resources>
