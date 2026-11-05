@@ -88,7 +88,7 @@ fun ShowCalculator(
                     .fillMaxWidth()
                     .padding(end = 5.dp, start = 5.dp),
                 text = result,
-                fontSize = if (error != null) 36.sp else 75.sp,
+                fontSize = 75.sp,
                 color = Color.White,
                 textAlign = TextAlign.End,
                 softWrap = false,
