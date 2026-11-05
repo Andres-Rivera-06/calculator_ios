@@ -28,6 +28,9 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.material3.Icon
 import androidx.compose.ui.res.painterResource
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.ui.unit.TextUnit
 
 @Composable
 fun ShowCalculator(
@@ -72,27 +75,15 @@ fun ShowCalculator(
             verticalArrangement = Arrangement.Bottom,
         ) {
 
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(end = 5.dp, start = 5.dp),
+            ScrollableDisplayText(
                 text = previousOperation.value,
                 fontSize = 40.sp,
-                color = colorResource(id = R.color.gray),
-                textAlign = TextAlign.End,
-                softWrap = false,
-                maxLines = 1
+                color = colorResource(id = R.color.gray)
             )
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(end = 5.dp, start = 5.dp),
+            ScrollableDisplayText(
                 text = result,
                 fontSize = 75.sp,
-                color = colorResource(id = R.color.white),
-                textAlign = TextAlign.End,
-                softWrap = false,
-                maxLines = 1
+                color = colorResource(id = R.color.white)
             )
             Column(
                 Modifier.fillMaxWidth(),
@@ -217,4 +208,23 @@ fun TestView() {
 fun errorMessage(error: CalculatorError): String = when (error) {
     CalculatorError.DivisionByZero -> stringResource(R.string.msgDivisionByZero)
     CalculatorError.InvalidOperation -> stringResource(R.string.msgError)
+}
+
+@Composable
+fun ScrollableDisplayText(text: String, fontSize: TextUnit, color: Color) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 5.dp)
+            .horizontalScroll(rememberScrollState(), reverseScrolling = true),
+        horizontalArrangement = Arrangement.End
+    ) {
+        Text(
+            text = text,
+            fontSize = fontSize,
+            color = color,
+            softWrap = false,
+            maxLines = 1
+        )
+    }
 }
