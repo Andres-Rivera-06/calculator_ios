@@ -2,6 +2,7 @@
     <string name="app_name">calculadora ios</string>
 
     <string name="msgError">Error en la operación</string>
+    <string name="msgDivisionByZero">Sin definir</string>
 
     <string name="addSymbol">+</string>
     <string name="subtractionSymbol">-</string>

@@ -9,8 +9,9 @@ class CalculatorViewModel : ViewModel() {
     private val model = CalculatorModel()
 
     val result = mutableStateOf("0")
-    var contentResult = mutableListOf<String>()
+    val contentResult = mutableListOf<String>()
     val previousOperation = mutableStateOf("")
+    val error = mutableStateOf<CalculatorError?>(null)
 
 
     val historyOperations = mutableStateListOf<String>()
@@ -20,6 +21,14 @@ class CalculatorViewModel : ViewModel() {
         get() = historyResults.isNotEmpty() && historyOperations.isNotEmpty()
 
     fun manageClickButtons(valueButton: String) {
+        if (valueButton == "=" && !canCalculate()) {
+            return
+        }
+        if (error.value != null) {
+            previousOperation.value = ""
+        }
+        error.value = null
+
 
         when (valueButton) {
             "AC" -> {
@@ -39,20 +48,21 @@ class CalculatorViewModel : ViewModel() {
             }
 
             "=" -> {
-                val lastItem = contentResult.lastOrNull()
-                if (lastItem == null || !isPartOfNumber(lastItem) && lastItem != "%") {
-                    return
-                }
-                val resultOperation = calculateResult()
-                result.value = resultOperation
-                previousOperation.value = contentResult.joinToString("")
-                contentResult.clear()
-                if (resultOperation.toDoubleOrNull() != null) {
+                val operation = contentResult.joinToString("")
+                try {
+                    val resultOperation = calculateResult()
+                    result.value = resultOperation
+                    previousOperation.value = operation
+                    contentResult.clear()
                     contentResult.addAll(resultOperation.map { it.toString() })
+                    historyOperations.add(operation)
+                    historyResults.add(resultOperation)
+                } catch (e: CalculatorException) {
+                    error.value = e.error
+                    previousOperation.value = operation
+                    contentResult.clear()
+                    result.value = "0"
                 }
-                historyOperations.add(previousOperation.value)
-                historyResults.add(resultOperation)
-
             }
 
             "⁺/₋" -> {
@@ -137,6 +147,11 @@ class CalculatorViewModel : ViewModel() {
 
         }
 
+    }
+
+    private fun canCalculate(): Boolean {
+        val lastItem = contentResult.lastOrNull() ?: return false
+        return isPartOfNumber(lastItem) || lastItem == "%"
     }
 
     private fun isPartOfNumber(value: String): Boolean {
@@ -273,71 +288,61 @@ class CalculatorViewModel : ViewModel() {
     fun multiply(number1: String, number2: String): String {
         val num1 = number1.toDoubleOrNull()
         val num2 = number2.toDoubleOrNull()
-        if (num1 != null && num2 != null) {
-            val result = model.multiply(num1, num2).toCleanString()
-            return result
-        } else {
-            return "Error"
+        if (num1 == null || num2 == null) {
+            throw CalculatorException(CalculatorError.InvalidOperation)
         }
+        return model.multiply(num1, num2).toCleanString()
     }
 
     fun divide(number1: String, number2: String): String {
         val num1 = number1.toDoubleOrNull()
         val num2 = number2.toDoubleOrNull()
+        if (num1 == null || num2 == null) {
+            throw CalculatorException(CalculatorError.InvalidOperation)
+        }
         if (num2 == 0.0) {
-            return "Sin definir"
+            throw CalculatorException(CalculatorError.DivisionByZero)
         }
-        if (num1 != null && num2 != null) {
-            val result = model.divide(num1, num2).toCleanString()
-            return result
-        } else {
-            return "Error"
-        }
+        return model.divide(num1, num2).toCleanString()
     }
 
     fun add(number1: String, number2: String): String {
         val num1 = number1.toDoubleOrNull()
         val num2 = number2.toDoubleOrNull()
-        if (num1 != null && num2 != null) {
-            val result = model.add(num1, num2).toCleanString()
-            return result
-        } else {
-            return "Error"
+        if (num1 == null || num2 == null) {
+            throw CalculatorException(CalculatorError.InvalidOperation)
         }
+        return model.add(num1, num2).toCleanString()
     }
 
     fun subtraction(number1: String, number2: String): String {
         val num1 = number1.toDoubleOrNull()
         val num2 = number2.toDoubleOrNull()
-        if (num1 != null && num2 != null) {
-            val result = model.subtraction(num1, num2).toCleanString()
-            return result
-        } else {
-            return "Error"
+        if (num1 == null || num2 == null) {
+            throw CalculatorException(CalculatorError.InvalidOperation)
         }
+        return model.subtraction(num1, num2).toCleanString()
     }
 
     fun module(number1: String, number2: String): String {
         val num1 = number1.toDoubleOrNull()
         val num2 = number2.toDoubleOrNull()
+        if (num1 == null || num2 == null) {
+            throw CalculatorException(CalculatorError.InvalidOperation)
+        }
         if (num2 == 0.0) {
-            return "Sin definir"
+            throw CalculatorException(CalculatorError.DivisionByZero)
         }
-        if (num1 != null && num2 != null) {
-            return model.module(num1, num2).toCleanString()
-        } else {
-            return "Error"
-        }
+        return model.module(num1, num2).toCleanString()
     }
 
     fun percent(base: String, number: String): String {
         val num1 = base.toDoubleOrNull()
         val num2 = number.toDoubleOrNull()
-        if (num1 != null && num2 != null) {
-            return model.percent(num1, num2).toCleanString()
-        } else {
-            return "Error"
+        if (num1 == null || num2 == null) {
+            throw CalculatorException(CalculatorError.InvalidOperation)
         }
+        return model.percent(num1, num2).toCleanString()
     }
 }
 

@@ -34,7 +34,8 @@ fun ShowCalculator(
     viewModel: CalculatorViewModel = viewModel(),
     navController: NavController
 ) {
-    val result = viewModel.result.value
+    val error = viewModel.error.value
+    val result = if (error != null) errorMessage(error) else viewModel.result.value
     val previousOperation = viewModel.previousOperation
 
     Column(
@@ -87,7 +88,7 @@ fun ShowCalculator(
                     .fillMaxWidth()
                     .padding(end = 5.dp, start = 5.dp),
                 text = result,
-                fontSize = 75.sp,
+                fontSize = if (error != null) 36.sp else 75.sp,
                 color = Color.White,
                 textAlign = TextAlign.End,
                 softWrap = false,
@@ -210,4 +211,10 @@ fun ShowButton(text: String, color: Color, viewModel: CalculatorViewModel) {
 fun TestView() {
     val navController = rememberNavController()
     ShowCalculator(navController = navController)
+}
+
+@Composable
+fun errorMessage(error: CalculatorError): String = when (error) {
+    CalculatorError.DivisionByZero -> stringResource(R.string.msgDivisionByZero)
+    CalculatorError.InvalidOperation -> stringResource(R.string.msgError)
 }
