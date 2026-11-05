@@ -119,6 +119,13 @@ class CalculatorViewModel : ViewModel() {
             else -> {
                 if (valueButton.isEmpty()) return
 
+                if (valueButton == ".") {
+                    if (currentNumberHasDecimal()) return
+                    val lastItem = contentResult.lastOrNull()
+                    if (lastItem == null || !isPartOfNumber(lastItem)) {
+                        contentResult.add("0")
+                    }
+                }
                 val isOperator = !isPartOfNumber(valueButton)
 
                 var lastItem = ""
@@ -152,6 +159,14 @@ class CalculatorViewModel : ViewModel() {
     private fun canCalculate(): Boolean {
         val lastItem = contentResult.lastOrNull() ?: return false
         return isPartOfNumber(lastItem) || lastItem == "%"
+    }
+
+    private fun currentNumberHasDecimal(): Boolean {
+        for (item in contentResult.asReversed()) {
+            if (item == ".") return true
+            if (!isPartOfNumber(item)) return false
+        }
+        return false
     }
 
     private fun isPartOfNumber(value: String): Boolean {
