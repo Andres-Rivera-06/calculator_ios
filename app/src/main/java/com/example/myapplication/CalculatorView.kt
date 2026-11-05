@@ -41,7 +41,7 @@ fun ShowCalculator(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black)
+            .background(colorResource(id = R.color.black))
             .safeDrawingPadding()
     ) {
 
@@ -59,7 +59,7 @@ fun ShowCalculator(
                 Icon(
                     painter = painterResource(id = R.drawable.baseline_schedule_24),
                     contentDescription = stringResource(id = R.string.history),
-                    tint = Color.White,
+                    tint = colorResource(id = R.color.white),
                     modifier = Modifier.size(28.dp)
                 )
             }
@@ -78,7 +78,7 @@ fun ShowCalculator(
                     .padding(end = 5.dp, start = 5.dp),
                 text = previousOperation.value,
                 fontSize = 40.sp,
-                color = Color.Gray,
+                color = colorResource(id = R.color.gray),
                 textAlign = TextAlign.End,
                 softWrap = false,
                 maxLines = 1
@@ -89,7 +89,7 @@ fun ShowCalculator(
                     .padding(end = 5.dp, start = 5.dp),
                 text = result,
                 fontSize = 75.sp,
-                color = Color.White,
+                color = colorResource(id = R.color.white),
                 textAlign = TextAlign.End,
                 softWrap = false,
                 maxLines = 1
@@ -199,7 +199,7 @@ fun ShowButton(text: String, color: Color, viewModel: CalculatorViewModel) {
     ) {
         Text(
             text = text,
-            color = Color.White,
+            color = colorResource(id = R.color.white),
             fontSize = 28.sp
         )
     }

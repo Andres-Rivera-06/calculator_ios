@@ -46,7 +46,7 @@ fun ShowHistory(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black)
+            .background(colorResource(id = R.color.black))
             .safeDrawingPadding()
     ) {
         Button(
@@ -66,7 +66,7 @@ fun ShowHistory(
                 painter = painterResource(id = R.drawable.baseline_calculate_24),
                 contentDescription = stringResource(id = R.string.backToCalculator),
                 modifier = Modifier.size(26.dp),
-                tint = Color.White
+                tint = colorResource(id = R.color.white)
             )
         }
         if (viewModel.hasHistory) {
@@ -85,7 +85,7 @@ fun ShowHistory(
                                     .height(2.dp)
                                     .align(Alignment.CenterHorizontally)
                                     .alpha(0.1f)
-                                    .background(Color.White)
+                                    .background(colorResource(id = R.color.white))
                         )
                         Text(
                             modifier = Modifier
@@ -93,7 +93,7 @@ fun ShowHistory(
                                 .padding(16.dp),
                             text = historyOperations[index],
                             fontSize = 18.sp,
-                            color = Color.Gray,
+                            color = colorResource(id= R.color.gray),
                             textAlign = TextAlign.Start
                         )
                         Text(
@@ -102,7 +102,7 @@ fun ShowHistory(
                                 .padding(start = 16.dp),
                             text = historyResults[index],
                             fontSize = 30.sp,
-                            color = Color.White,
+                            color = colorResource(id= R.color.white),
                             textAlign = TextAlign.Start
                         )
                     }
@@ -118,12 +118,12 @@ fun ShowHistory(
                 Icon(
                     painter = painterResource(id = R.drawable.baseline_schedule_24),
                     contentDescription = stringResource(id = R.string.history),
-                    tint = Color.Gray,
+                    tint = colorResource(id= R.color.gray),
                     modifier = Modifier.size(52.dp)
                 )
                 Text(
                     text = stringResource(R.string.msgEmptyHistory),
-                    color = Color.Gray,
+                    color = colorResource(id= R.color.gray),
                     fontSize = 32.sp,
                     textAlign = TextAlign.Center
 
